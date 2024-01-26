@@ -1,8 +1,9 @@
+import Categories from "@/components/categories/Categories";
 
 export default function Home() {
   return (
-    <div className="">
-      test
+    <div className="container">
+      <Categories />
     </div>
   );
 }
