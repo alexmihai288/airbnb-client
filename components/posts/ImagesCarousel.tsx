@@ -93,7 +93,7 @@ const CarouselImages: FC<CarouselImagesProps> = ({ carouselImages }) => {
             <Dot
               key={index}
               className={`text-[#ababa7] duration-700 gap-0 ${
-                index + 1 === current ? "text-white" : "text-red-600"
+                index + 1 === current ? "text-white" : ""
               }`}
             />
           ))}
