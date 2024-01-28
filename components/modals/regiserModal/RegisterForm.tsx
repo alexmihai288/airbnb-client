@@ -1,5 +1,5 @@
 "use client";
-import { LoginSchema, LoginSchemaType } from "@/schemas";
+import { RegisterSchema, RegisterSchemaType } from "@/schemas";
 import { FC, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,11 +21,12 @@ import { Separator } from "@/components/ui/separator";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import OpenRegisterModal from "@/components/OpenRegisterModal";
+import OpenLoginModal from "@/components/OpenLoginModal";
+import { register } from "@/actions/register";
 
-interface LoginFormProps {}
+interface RegisterFormProps {}
 
-const LoginForm: FC<LoginFormProps> = ({}) => {
+const RegisterForm: FC<RegisterFormProps> = ({}) => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
   // const urlError =
@@ -37,29 +38,30 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
   const [succes, setSucces] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<LoginSchemaType>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<RegisterSchemaType>({
+    resolver: zodResolver(RegisterSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (values: LoginSchemaType) => {
+  const onSubmit = (values: RegisterSchemaType) => {
     setError("");
     setSucces("");
+
     startTransition(() => {
-  
-      login(values, callbackUrl)
+      register(values)
         .then((data) => {
-          console.log(data)
-          if (data?.success) {
+          if (data.error) {
             form.reset();
-            setSucces(data?.success);
+            setError(data.error);
           }
-          if (data?.error) {
+
+          if (data.success) {
             form.reset();
-            setError(data?.error);
+            setSucces(data.success);
           }
         })
         .catch(() => setError("Something went wrong"));
@@ -69,6 +71,19 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input disabled={isPending} placeholder="John Doe" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="email"
@@ -113,13 +128,13 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
               type="submit"
               className="bg-primaryRed hover:bg-secondaryRed transition-colors ml-auto"
             >
-              Login
+              Register
             </Button>
-            <OpenRegisterModal>
+            <OpenLoginModal>
               <span className="text-xs underline mt-2">
-                Don&apos;t have an account?
+                Already have an account?
               </span>
-            </OpenRegisterModal>
+            </OpenLoginModal>
           </div>
         </div>
 
@@ -141,4 +156,4 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

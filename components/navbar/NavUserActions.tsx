@@ -4,7 +4,8 @@ import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import UserOptions from "./UserOptions";
 
-interface NavUserActionsProps {}
+interface NavUserActionsProps {
+}
 
 const NavUserActions: FC<NavUserActionsProps> = ({}) => {
   return (

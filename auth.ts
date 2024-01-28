@@ -30,9 +30,6 @@ export const {
     async signIn({ user, account }) {
       if (account?.provider !== "credentials") return true;
 
-      const existingUser = await getUserById(user.id!);
-      if (!existingUser?.emailVerified) return false;
-
       return true;
     },
     //@ts-ignore

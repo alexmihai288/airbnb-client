@@ -3,10 +3,12 @@ import { FC } from "react";
 import NavActions from "./NavActions";
 import NavUserActions from "./NavUserActions";
 import Link from "next/link";
+import { currentUser } from "@/lib/auth";
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = ({}) => {
+  
   return (
     <div className="container flex items-center justify-between py-5">
       <Link href="/">

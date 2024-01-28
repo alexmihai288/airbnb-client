@@ -5,11 +5,12 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Separator } from "../ui/separator";
 import LogoutButton from "./LogoutButton";
 import { currentUser } from "@/lib/auth";
-import { LoginButton } from "./LoginButton";
+import OpenLoginModal from "../OpenLoginModal";
+import OpenRegisterModal from "../OpenRegisterModal";
 
 interface UserOptionsProps {}
 
-const UserOptions: FC<UserOptionsProps> = async ({}) => {
+const UserOptions: FC<UserOptionsProps> = async () => {
   const user = await currentUser();
   return (
     <Popover>
@@ -17,7 +18,7 @@ const UserOptions: FC<UserOptionsProps> = async ({}) => {
         <div className="flex items-center gap-2.5 shadow-md px-4 py-2 rounded-full hover:shadow-lg transition-shadow">
           <Menu />
           <Image
-            src="/placeholder.jpg"
+            src={user?.image ?? "/placeholder.jpg"}
             alt="user-image"
             className="rounded-full"
             width={35}
@@ -38,14 +39,16 @@ const UserOptions: FC<UserOptionsProps> = async ({}) => {
         ) : (
           <>
             <div className="pt-2.5">
-              <LoginButton mode="modal">
+              <OpenLoginModal>
                 <p className="hover:bg-primaryGrey p-2.5 text-md font-medium">
                   Login
                 </p>
-              </LoginButton>
-              <p className="hover:bg-primaryGrey p-2.5 text-md font-normal">
-                Sign up
-              </p>
+              </OpenLoginModal>
+              <OpenRegisterModal>
+                <p className="hover:bg-primaryGrey p-2.5 text-md font-normal">
+                  Sign up
+                </p>
+              </OpenRegisterModal>
             </div>
             <Separator className="mb-2.5" />
             <p className="hover:bg-primaryGrey p-2.5 text-md font-normal">
