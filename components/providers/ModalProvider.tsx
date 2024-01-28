@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import LoginModal from "../modals/LoginModal";
+import LoginModal from "../modals/loginModal/LoginModal";
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
 

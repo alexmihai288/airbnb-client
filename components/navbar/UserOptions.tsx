@@ -5,7 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Separator } from "../ui/separator";
 import LogoutButton from "./LogoutButton";
 import { currentUser } from "@/lib/auth";
-import OpenLoginModal from "./OpenLoginModal";
+import { LoginButton } from "./LoginButton";
 
 interface UserOptionsProps {}
 
@@ -38,7 +38,11 @@ const UserOptions: FC<UserOptionsProps> = async ({}) => {
         ) : (
           <>
             <div className="pt-2.5">
-              <OpenLoginModal />
+              <LoginButton mode="modal">
+                <p className="hover:bg-primaryGrey p-2.5 text-md font-medium">
+                  Login
+                </p>
+              </LoginButton>
               <p className="hover:bg-primaryGrey p-2.5 text-md font-normal">
                 Sign up
               </p>
