@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar/Navbar";
 import { Separator } from "@/components/ui/separator";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+import { ModalProvider } from "@/components/providers/ModalProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default async function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <QueryProvider>
+            <ModalProvider />
             <Navbar />
             <Separator />
             {children}
