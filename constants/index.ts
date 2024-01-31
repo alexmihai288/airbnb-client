@@ -8,12 +8,16 @@ import {
   GiCaveEntrance,
   GiForestCamp,
   GiIsland,
-  GiWindmill,
+  GiTreehouse,
 } from "react-icons/gi";
 import { FaSkiing } from "react-icons/fa";
 import { BsSnow } from "react-icons/bs";
 import { IoDiamond } from "react-icons/io5";
 import { MdOutlineVilla } from "react-icons/md";
+import { LuCastle, LuSailboat } from "react-icons/lu";
+import { MdSurfing } from "react-icons/md";
+import { RiCaravanLine } from "react-icons/ri";
+import { PiParkDuotone } from "react-icons/pi";
 
 interface CategoryIcons {
   label: string;
@@ -90,5 +94,35 @@ export const CategoryIcons: CategoryIcons[] = [
     label: "Lux",
     icon: IoDiamond,
     description: "This property is brand new and luxurious!",
+  },
+  {
+    label: "Treehouses",
+    icon: GiTreehouse,
+    description: "This property is a house in a tree",
+  },
+  {
+    label: "Castles",
+    icon: LuCastle,
+    description: "This property is in a castle",
+  },
+  {
+    label: "Boats",
+    icon: LuSailboat,
+    description: "This property is a boat",
+  },
+  {
+    label: "Surfing",
+    icon: MdSurfing,
+    description: "This property is best for surfing",
+  },
+  {
+    label: "Campers",
+    icon: RiCaravanLine,
+    description: "This property is a caravan",
+  },
+  {
+    label: "National parks",
+    icon: PiParkDuotone,
+    description: "This property is best for nation parks",
   },
 ];

@@ -1,11 +1,8 @@
 import Categories from "@/components/categories/Categories";
 import PostFeed from "@/components/posts/PostFeed";
 import { Separator } from "@/components/ui/separator";
-import { currentUser } from "@/lib/auth";
 
-export default async function Home() {
-  // const user = await currentUser()
-  // console.log(user)
+export default function Home() {
   return (
     <div className="">
       <div className="container">
