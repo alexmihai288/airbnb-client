@@ -101,11 +101,6 @@ export const CategoryIcons: CategoryIcons[] = [
     description: "This property is a house in a tree",
   },
   {
-    label: "Castles",
-    icon: LuCastle,
-    description: "This property is in a castle",
-  },
-  {
     label: "Boats",
     icon: LuSailboat,
     description: "This property is a boat",

@@ -49,3 +49,35 @@ model VerificationToken {
 
   @@unique([email, token])
 }
+
+enum LocationType {
+  Beach
+  Modern
+  Countryside
+  Pools
+  Islands
+  Lake
+  Skiing
+  Castles
+  Caves
+  Camping
+  Arctic
+  Desert
+  Barns
+  Lux
+  Treehouses
+  Boats
+  Surfing
+  Campers
+  NationalParks
+}
+
+model Post {
+  id    String @id @default(cuid())
+  title String
+  country String
+  streetAddress String
+  postalCode Int
+
+  locationType LocationType
+}
