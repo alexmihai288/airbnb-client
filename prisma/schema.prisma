@@ -17,6 +17,7 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
+  posts         Post[]
 
   accounts Account[]
 }
@@ -73,11 +74,24 @@ enum LocationType {
 }
 
 model Post {
-  id    String @id @default(cuid())
-  title String
-  country String
+  id            String   @id @default(cuid())
+  title         String
+  country       String
+  city          String
   streetAddress String
-  postalCode Int
+  postalCode    Int
+  bedRooms      Int
+  bathRooms     Int
+  images        String[] @db.Text
+  price         Int
+  startFreeWeek DateTime
+  endFreeWeek   DateTime
+  rate Int
+
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId String
 
   locationType LocationType
+
+  @@index([ownerId])
 }
