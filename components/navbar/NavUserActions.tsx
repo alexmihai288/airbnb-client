@@ -1,22 +1,18 @@
 import { FC } from "react";
-import Link from "next/link";
-import { buttonVariants } from "../ui/button";
-import { cn } from "@/lib/utils";
 import UserOptions from "./UserOptions";
+import OpenCreatePostModal from "../OpenCreatePostModal";
 
-interface NavUserActionsProps {
-}
+interface NavUserActionsProps {}
 
 const NavUserActions: FC<NavUserActionsProps> = ({}) => {
   return (
     <div className="flex items-center gap-2.5">
-      <Link
-        href="/"
-        className={cn(buttonVariants({ variant: "rentLink" }), "text-md")}
-      >
-        AirBnb your home
-      </Link>
-      <UserOptions/>
+      <OpenCreatePostModal>
+        <p className="cursor-pointer text-md h-10 px-4 py-2 hover:bg-[#f7f7f7] rounded-full">
+          AirBnb your home
+        </p>
+      </OpenCreatePostModal>
+      <UserOptions />
     </div>
   );
 };
