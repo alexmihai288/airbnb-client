@@ -23,7 +23,7 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="h-[500px]">
         <DialogHeader>
           <DialogTitle className="text-center py-2.5">
             {part == 1 && "Which of these best describes your place?"}
@@ -35,7 +35,7 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
         {part == 1 && <ChooseLocationType />}
         {part == 2 && <ChooseAddress />}
 
-        <DialogFooter>
+        <DialogFooter className="mt-auto">
           <div className="flex w-full justify-between">
             <Button
               variant="link"

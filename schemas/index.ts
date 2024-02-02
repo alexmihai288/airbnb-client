@@ -18,3 +18,12 @@ export const RegisterSchema = z.object({
 });
 
 export type RegisterSchemaType = z.infer<typeof RegisterSchema>;
+
+export const ChooseAddressSchema = z.object({
+  country: z.string(),
+  city: z.string(),
+  streetAddress: z.string(),
+  postalCode: z.string(),
+});
+
+export type ChooseAddressSchemaType = z.infer<typeof ChooseAddressSchema>;
