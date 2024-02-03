@@ -11,9 +11,11 @@ import { useModal } from "@/hooks/use-modal";
 import { FC, useState } from "react";
 import { Button } from "@/components/ui/button";
 import ChooseLocationType from "./createParts/ChooseLocationType";
-import ChooseAddress from "./createParts/ChooseAddress";
+
 import Basics from "./createParts/Basics";
 import { Progress } from "@/components/ui/progress";
+import { FileUpload } from "./createParts/UploadImages";
+import ChooseAddress from "./createParts/ChooseAddress";
 
 interface CreatePostModalProps {}
 
@@ -22,7 +24,25 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
   const isModalOpen = isOpen && type === "createPost";
   const [part, setPart] = useState<number>(1);
 
-  console.log(part);
+  //ChooseAddress Part
+  const [locationType, setLocationType] = useState<string>("Beach");
+  const [country, setCountry] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [streetAddress, setStreetAddress] = useState<string>("");
+  const [postalCode, setPostalCode] = useState<string>("");
+  const buttonDisabled =
+    country.length == 0 && city.length == 0 && !postalCode && part == 2;
+
+  //Basics Part
+  const [bedRooms, setBedRooms] = useState<number>(1);
+  const [bathRooms, setBathRooms] = useState<number>(1);
+
+  //Upload Part
+  const [images, setImages] = useState([""]);
+
+
+  
+
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent>
@@ -36,9 +56,33 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
           <Separator />
         </DialogHeader>
 
-        {part == 1 && <ChooseLocationType />}
-        {part == 2 && <ChooseAddress />}
-        {part == 3 && <Basics />}
+        {part == 1 && (
+          <ChooseLocationType
+            setLocationType={setLocationType}
+            locationType={locationType}
+          />
+        )}
+        {part == 2 && (
+          <ChooseAddress
+            setCountry={setCountry}
+            country={country}
+            setCity={setCity}
+            city={city}
+            setStreetAddress={setStreetAddress}
+            streetAddress={streetAddress}
+            setPostalCode={setPostalCode}
+            postalCode={postalCode}
+          />
+        )}
+        {part == 3 && (
+          <Basics
+            setBedRooms={setBedRooms}
+            bedRooms={bedRooms}
+            setBathRooms={setBathRooms}
+            bathRooms={bathRooms}
+          />
+        )}
+        {part == 4 && <FileUpload setImages={setImages} images={images} />}
 
         <DialogFooter className="mt-auto">
           <div className="flex w-full justify-between">
@@ -58,13 +102,26 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
             >
               Back
             </Button>
-            <Progress value={part * 25} className="w-[40%] my-auto" />
-            <Button
-              className="text-lg px-6 py-4"
-              onClick={() => setPart((prevPart) => prevPart + 1)}
-            >
-              Next
-            </Button>
+            <Progress
+              value={part < 4 ? part * 25 : part * 20}
+              className="w-[40%] my-auto"
+            />
+            {part < 4 ? (
+              <Button
+                disabled={buttonDisabled}
+                className="text-lg px-6 py-4"
+                onClick={() => setPart((prevPart) => prevPart + 1)}
+              >
+                Next
+              </Button>
+            ) : (
+              <Button
+                className="text-lg px-6 py-4"
+                disabled={images[0].length == 0}
+              >
+                Create
+              </Button>
+            )}
           </div>
         </DialogFooter>
       </DialogContent>

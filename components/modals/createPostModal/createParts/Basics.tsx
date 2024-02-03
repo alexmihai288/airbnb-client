@@ -1,13 +1,20 @@
 "use client";
 import { Separator } from "@/components/ui/separator";
-import { FC, useState } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
-interface BasicsProps {}
+interface BasicsProps {
+  setBedRooms: Dispatch<SetStateAction<number>>;
+  bedRooms: number;
+  setBathRooms: Dispatch<SetStateAction<number>>;
+  bathRooms: number;
+}
 
-const Basics: FC<BasicsProps> = ({}) => {
-  const [bedRooms, setBedRooms] = useState<number>(1);
-  const [bathRooms, setBathRooms] = useState<number>(1);
-
+const Basics: FC<BasicsProps> = ({
+  setBedRooms,
+  bedRooms,
+  setBathRooms,
+  bathRooms,
+}) => {
   return (
     <div className="space-y-5 py-10">
       <div className="flex items-center justify-between">

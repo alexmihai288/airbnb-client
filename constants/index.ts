@@ -24,6 +24,8 @@ interface CategoryIcons {
   icon: IconType;
   description: string;
 }
+export type CategoryIconsType = CategoryIcons;
+
 export const CategoryIcons: CategoryIcons[] = [
   {
     label: "Beach",

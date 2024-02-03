@@ -5,29 +5,53 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ChooseAddressSchema, ChooseAddressSchemaType } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FC, useTransition } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
-interface ChooseAdressProps {}
+interface ChooseAdressProps {
+  setCountry: Dispatch<SetStateAction<string>>;
+  country: string;
+  setCity: Dispatch<SetStateAction<string>>;
+  city: string;
+  setStreetAddress: Dispatch<SetStateAction<string>>;
+  streetAddress: string;
+  setPostalCode: Dispatch<SetStateAction<string>>;
+  postalCode: string;
+}
 
-const ChooseAddress: FC<ChooseAdressProps> = ({}) => {
+const ChooseAddress: FC<ChooseAdressProps> = ({
+  setCountry,
+  country,
+  setCity,
+  city,
+  setStreetAddress,
+  streetAddress,
+  setPostalCode,
+  postalCode,
+}) => {
   const form = useForm<ChooseAddressSchemaType>({
     resolver: zodResolver(ChooseAddressSchema),
     defaultValues: {
-      country: "",
-      city: "",
-      streetAddress: "",
-      postalCode: "",
+      country: country,
+      city: city,
+      streetAddress: streetAddress,
+      postalCode: postalCode || "",
     },
   });
 
-  const onSubmit = (values: ChooseAddressSchemaType) => {};
+  const onSubmit = (values: ChooseAddressSchemaType) => {
+    toast.success("Informations saved !");
+    setCountry(values.country);
+    setCity(values.city);
+    setStreetAddress(values.streetAddress);
+    setPostalCode(values.postalCode);
+  };
 
   return (
     <Form {...form}>
@@ -38,7 +62,7 @@ const ChooseAddress: FC<ChooseAdressProps> = ({}) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Ex:Country - Denmark" {...field} />
+                <Input placeholder="Ex: Country - Denmark" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

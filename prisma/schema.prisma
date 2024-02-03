@@ -79,19 +79,19 @@ model Post {
   country       String
   city          String
   streetAddress String
-  postalCode    Int
+  postalCode    String
   bedRooms      Int
   bathRooms     Int
   images        String[] @db.Text
   price         Int
   startFreeWeek DateTime
   endFreeWeek   DateTime
-  rate Int
+  rate          Int
+
+  locationType LocationType
 
   owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId String
-
-  locationType LocationType
 
   @@index([ownerId])
 }
