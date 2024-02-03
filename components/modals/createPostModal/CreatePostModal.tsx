@@ -16,6 +16,9 @@ import Basics from "./createParts/Basics";
 import { Progress } from "@/components/ui/progress";
 import { FileUpload } from "./createParts/UploadImages";
 import ChooseAddress from "./createParts/ChooseAddress";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { Loader2 } from "lucide-react";
 
 interface CreatePostModalProps {}
 
@@ -40,8 +43,46 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
   //Upload Part
   const [images, setImages] = useState([""]);
 
+  const { mutate: createPost, isPending } = useMutation({
+    mutationFn: async ({
+      locationType,
+      country,
+      city,
+      streetAddress,
+      postalCode,
+      bedRooms,
+      bathRooms,
+      images,
+    }: {
+      locationType: string;
+      country: string;
+      city: string;
+      streetAddress: string;
+      postalCode: string;
+      bedRooms: number;
+      bathRooms: number;
+      images: string[];
+    }) => {
+      const payload = {
+        locationType,
+        country,
+        city,
+        streetAddress,
+        postalCode,
+        bedRooms,
+        bathRooms,
+        images,
+      };
 
-  
+      const { data } = await axios.post("/api/post",payload);
+
+      return data;
+    },
+    onSuccess: (data, variables, context) => {
+      console.log(data)
+    },
+    onError: () => {},
+  });
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -117,8 +158,20 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
             ) : (
               <Button
                 className="text-lg px-6 py-4"
-                disabled={images[0].length == 0}
+                onClick={() =>
+                  createPost({
+                    locationType,
+                    country,
+                    city,
+                    streetAddress,
+                    postalCode,
+                    bedRooms,
+                    bathRooms,
+                    images,
+                  })
+                }
               >
+                {isPending && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}{" "}
                 Create
               </Button>
             )}
