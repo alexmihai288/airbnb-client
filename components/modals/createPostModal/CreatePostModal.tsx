@@ -12,6 +12,7 @@ import { FC, useState } from "react";
 import { Button } from "@/components/ui/button";
 import ChooseLocationType from "./createParts/ChooseLocationType";
 import ChooseAddress from "./createParts/ChooseAddress";
+import Basics from "./createParts/Basics";
 
 interface CreatePostModalProps {}
 
@@ -23,17 +24,19 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="h-[500px]">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-center py-2.5">
             {part == 1 && "Which of these best describes your place?"}
             {part == 2 && "Confirm your address"}
+            {part == 3 && "Share some basics about your place"}
           </DialogTitle>
           <Separator />
         </DialogHeader>
 
         {part == 1 && <ChooseLocationType />}
         {part == 2 && <ChooseAddress />}
+        {part == 3 && <Basics />}
 
         <DialogFooter className="mt-auto">
           <div className="flex w-full justify-between">

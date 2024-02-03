@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -79,6 +80,12 @@ const ChooseAddress: FC<ChooseAdressProps> = ({}) => {
             </FormItem>
           )}
         />
+        <Button
+          type="submit"
+          className="bg-primaryRed hover:bg-secondaryRed transition-colors ml-auto"
+        >
+          Save
+        </Button>
       </form>
     </Form>
   );

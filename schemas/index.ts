@@ -20,10 +20,16 @@ export const RegisterSchema = z.object({
 export type RegisterSchemaType = z.infer<typeof RegisterSchema>;
 
 export const ChooseAddressSchema = z.object({
-  country: z.string(),
-  city: z.string(),
-  streetAddress: z.string(),
-  postalCode: z.string(),
+  country: z
+    .string()
+    .min(4, { message: "Country must be at least 4 characters" }),
+  city: z.string().min(1, { message: "City must be at least 1 character" }),
+  streetAddress: z
+    .string()
+    .min(4, { message: "Street address must be at least 4 characters" }),
+  postalCode: z
+    .string()
+    .min(5, { message: "Postal code must be at least 5 characters" }),
 });
 
 export type ChooseAddressSchemaType = z.infer<typeof ChooseAddressSchema>;
