@@ -12,7 +12,7 @@ export default async function Home() {
       </div>
       <Separator />
       <div className="container py-2.5">
-        <PostFeed posts={posts || []} />
+        <PostFeed posts={posts} />
       </div>
     </div>
   );
