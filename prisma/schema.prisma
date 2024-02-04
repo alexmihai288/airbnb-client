@@ -75,7 +75,6 @@ enum LocationType {
 
 model Post {
   id            String   @id @default(cuid())
-  title         String
   country       String
   city          String
   streetAddress String

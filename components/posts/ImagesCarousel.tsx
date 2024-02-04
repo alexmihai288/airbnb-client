@@ -42,51 +42,17 @@ const CarouselImages: FC<CarouselImagesProps> = ({ carouselImages }) => {
         setApi={setApi}
       >
         <CarouselContent>
-          <CarouselItem>
-            <Image
-              src="/photo.avif"
-              alt="post-image"
-              width={500}
-              height={500}
-              className="rounded-xl object-cover max-w-[380px] max-h-[360px]"
-            />
-          </CarouselItem>
-          <CarouselItem>
-            <Image
-              src="/photo.avif"
-              alt="post-image"
-              width={500}
-              height={500}
-              className="rounded-xl object-cover max-w-[380px] max-h-[360px]"
-            />
-          </CarouselItem>{" "}
-          <CarouselItem>
-            <Image
-              src="/photo.avif"
-              alt="post-image"
-              width={500}
-              height={500}
-              className="rounded-xl object-cover max-w-[380px] max-h-[360px]"
-            />
-          </CarouselItem>{" "}
-          <CarouselItem>
-            <Image
-              src="/photo.avif"
-              alt="post-image"
-              width={500}
-              height={500}
-              className="rounded-xl object-cover max-w-[380px] max-h-[360px]"
-            />
-          </CarouselItem>{" "}
-          <CarouselItem>
-            <Image
-              src="/photo.avif"
-              alt="post-image"
-              width={500}
-              height={500}
-              className="rounded-xl object-cover max-w-[380px] max-h-[360px]"
-            />
-          </CarouselItem>
+          {carouselImages.map((carouselImage) => (
+            <CarouselItem key={carouselImage}>
+              <Image
+                src={carouselImage}
+                alt="post-image"
+                width={500}
+                height={500}
+                className="rounded-xl object-cover max-w-[380px] max-h-[360px]"
+              />
+            </CarouselItem>
+          ))}
         </CarouselContent>
         <div className="absolute bottom-0 left-[34%] flex items-center">
           {[...Array(Math.min(count, 5))].map((_, index) => (

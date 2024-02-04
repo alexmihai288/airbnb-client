@@ -16,9 +16,10 @@ import Basics from "./createParts/Basics";
 import { Progress } from "@/components/ui/progress";
 import { FileUpload } from "./createParts/UploadImages";
 import ChooseAddress from "./createParts/ChooseAddress";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios, { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface CreatePostModalProps {}
 
@@ -39,10 +40,12 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
   //Basics Part
   const [bedRooms, setBedRooms] = useState<number>(1);
   const [bathRooms, setBathRooms] = useState<number>(1);
+  const [priceNight, setPriceNight] = useState<number>(199);
 
   //Upload Part
   const [images, setImages] = useState([""]);
 
+  const queryClient = useQueryClient();
   const { mutate: createPost, isPending } = useMutation({
     mutationFn: async ({
       locationType,
@@ -53,6 +56,7 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
       bedRooms,
       bathRooms,
       images,
+      price,
     }: {
       locationType: string;
       country: string;
@@ -62,6 +66,7 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
       bedRooms: number;
       bathRooms: number;
       images: string[];
+      price: number;
     }) => {
       const payload = {
         locationType,
@@ -72,16 +77,26 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
         bedRooms,
         bathRooms,
         images,
+        price,
       };
 
-      const { data } = await axios.post("/api/post",payload);
+      const { data } = await axios.post("/api/post", payload);
 
       return data;
     },
     onSuccess: (data, variables, context) => {
-      console.log(data)
+      onClose();
+      toast.success("You added your first location !");
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
-    onError: () => {},
+    onError: (error) => {
+      if (error instanceof AxiosError)
+        toast.error(
+          error.response?.data ||
+            "Something went wrong. Please try again later."
+        );
+      else toast.error("Something went wrong. Please try again later.");
+    },
   });
 
   return (
@@ -121,6 +136,8 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
             bedRooms={bedRooms}
             setBathRooms={setBathRooms}
             bathRooms={bathRooms}
+            setPriceNight={setPriceNight}
+            priceNight={priceNight}
           />
         )}
         {part == 4 && <FileUpload setImages={setImages} images={images} />}
@@ -168,6 +185,7 @@ const CreatePostModal: FC<CreatePostModalProps> = ({}) => {
                     bedRooms,
                     bathRooms,
                     images,
+                    price: priceNight,
                   })
                 }
               >

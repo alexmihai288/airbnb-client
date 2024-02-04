@@ -1,4 +1,5 @@
 "use client";
+import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Dispatch, FC, SetStateAction } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
@@ -7,6 +8,8 @@ interface BasicsProps {
   bedRooms: number;
   setBathRooms: Dispatch<SetStateAction<number>>;
   bathRooms: number;
+  setPriceNight: Dispatch<SetStateAction<number>>;
+  priceNight: number;
 }
 
 const Basics: FC<BasicsProps> = ({
@@ -14,6 +17,8 @@ const Basics: FC<BasicsProps> = ({
   bedRooms,
   setBathRooms,
   bathRooms,
+  setPriceNight,
+  priceNight,
 }) => {
   return (
     <div className="space-y-5 py-10">
@@ -55,6 +60,16 @@ const Basics: FC<BasicsProps> = ({
             onClick={() => setBathRooms((prevState) => prevState + 1)}
           />
         </div>
+      </div>
+      <Separator />
+      <div className="space-y-2">
+        <p className="text-lg font-medium">Price per nigth €</p>
+        <Input
+          type="number"
+          onChange={(e) => setPriceNight(Number(e.target.value))}
+          value={priceNight}
+          autoFocus
+        />
       </div>
     </div>
   );
