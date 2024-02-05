@@ -1,5 +1,10 @@
 /* An array of routes that are accessible to the public, NOT required authentication */
-export const publicRoutes = ["/", "/auth/new-verification", "/api/uploadthing"];
+export const publicRoutes = [
+  "/",
+  "/auth/new-verification",
+  "/api/queryFns/posts",
+  "/api/uploadthing",
+];
 
 /* An array of routes that are used for authentication */
 export const authRoutes = ["/auth/login", "/auth/register", "/auth/error"];
