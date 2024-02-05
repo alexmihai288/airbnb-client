@@ -4,6 +4,7 @@ import Post from "./Post";
 import { Post as PostType } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import { fetchGroups } from "@/lib/queryFns";
+import axios from "axios";
 
 interface PostFeedProps {
   posts: PostType[];
@@ -12,7 +13,11 @@ interface PostFeedProps {
 const PostFeed: FC<PostFeedProps> = ({ posts }) => {
   const { data } = useQuery({
     queryKey: ["posts"],
-    queryFn: fetchGroups,
+    queryFn: async () => {
+      const { data } = await axios.get("/api/queryFns/posts");
+      console.log(data, "das2");
+      return data as Post[];
+    },
     initialData: posts,
   });
 
