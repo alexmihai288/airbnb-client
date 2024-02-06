@@ -13,13 +13,13 @@ const NavUserActions: FC<NavUserActionsProps> = async ({}) => {
       <div className="hidden md:block">
         {user?.id ? (
           <OpenCreatePostModal>
-            <p className="cursor-pointer text-md  whitespace-nowrap h-10 px-4 py-2 hover:bg-[#f7f7f7] rounded-full">
+            <p className="cursor-pointer text-md whitespace-nowrap h-10 px-4 py-2 hover:bg-[#f7f7f7] rounded-full">
               AirBnb your home
             </p>
           </OpenCreatePostModal>
         ) : (
           <OpenLoginModal>
-            <p className="hover:bg-primaryGrey whitespace-nowrap p-2.5 text-md  h-10 px-4 py-2 rounded-full">
+            <p className="cursor-pointer text-md whitespace-nowrap h-10 px-4 py-2 hover:bg-[#f7f7f7] rounded-full">
               AirBnb your home
             </p>
           </OpenLoginModal>

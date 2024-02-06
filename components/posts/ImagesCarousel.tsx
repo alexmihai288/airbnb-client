@@ -37,10 +37,7 @@ const CarouselImages: FC<CarouselImagesProps> = ({ carouselImages }) => {
 
   return (
     <>
-      <Carousel
-        className="max-w-[380px] max-h-[360px] relative"
-        setApi={setApi}
-      >
+      <Carousel className="relative" setApi={setApi}>
         <CarouselContent>
           {carouselImages.map((carouselImage) => (
             <CarouselItem key={carouselImage}>
@@ -49,7 +46,7 @@ const CarouselImages: FC<CarouselImagesProps> = ({ carouselImages }) => {
                 alt="post-image"
                 width={500}
                 height={500}
-                className="rounded-xl object-cover max-w-[380px] max-h-[360px]"
+                className="rounded-xl object-cover max-w-[320px] "
               />
             </CarouselItem>
           ))}
