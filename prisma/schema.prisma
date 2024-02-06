@@ -85,7 +85,7 @@ model Post {
   price         Int
   startFreeWeek DateTime
   endFreeWeek   DateTime
-  rate          Int
+  rate          Int?
 
   locationType LocationType
 

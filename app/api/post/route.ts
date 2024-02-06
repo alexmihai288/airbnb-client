@@ -32,7 +32,6 @@ export async function POST(req: Request) {
         postalCode,
         bedRooms,
         bathRooms,
-        rate: 1,
         startFreeWeek: new Date(),
         endFreeWeek: new Date(),
         images,

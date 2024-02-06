@@ -7,6 +7,7 @@ import LogoutButton from "./LogoutButton";
 import { currentUser } from "@/lib/auth";
 import OpenLoginModal from "../OpenLoginModal";
 import OpenRegisterModal from "../OpenRegisterModal";
+import OpenCreatePostModal from "../OpenCreatePostModal";
 
 interface UserOptionsProps {}
 
@@ -32,6 +33,11 @@ const UserOptions: FC<UserOptionsProps> = async () => {
             <div className="font-medium pt-2.5">
               <p className="hover:bg-primaryGrey p-2.5 text-md">Trips</p>
               <p className="hover:bg-primaryGrey p-2.5 text-md">Wishlists</p>
+              <OpenCreatePostModal>
+                <p className="hover:bg-primaryGrey p-2.5 text-md md:hidden">
+                  AirBnb your home
+                </p>
+              </OpenCreatePostModal>
             </div>
             <Separator className="mb-2.5" />
             <LogoutButton />
@@ -44,6 +50,11 @@ const UserOptions: FC<UserOptionsProps> = async () => {
                   Login
                 </p>
               </OpenLoginModal>
+              <OpenLoginModal>
+                <p className="hover:bg-primaryGrey p-2.5 text-md sm:hidden">
+                  AirBnb your home
+                </p>
+              </OpenLoginModal>
               <OpenRegisterModal>
                 <p className="hover:bg-primaryGrey p-2.5 text-md font-normal">
                   Sign up
@@ -51,9 +62,6 @@ const UserOptions: FC<UserOptionsProps> = async () => {
               </OpenRegisterModal>
             </div>
             <Separator className="mb-2.5" />
-            <p className="hover:bg-primaryGrey p-2.5 text-md font-normal">
-              Airbnb your home
-            </p>
             <p className="hover:bg-primaryGrey p-2.5 text-md font-normal">
               Help Center
             </p>

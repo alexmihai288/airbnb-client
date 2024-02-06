@@ -16,12 +16,13 @@ const Post: FC<PostProps> = ({ post }) => {
           <p className="font-medium text-md">
             {post.city}, {post.country}
           </p>
-          <div className="flex items-center">
-            <FaStar />
-            <span className="ml-2">{post.rate}</span>
-          </div>
+          {post.rate && (
+            <div className="flex items-center">
+              <FaStar />
+              <span className="ml-2">{post.rate}</span>
+            </div>
+          )}
         </div>
-        <p className="text-secondaryGrey font-light">1,096 kilometers away</p>
         <p className="text-secondaryGrey font-light">Apr 7 - 12</p>
         <p className="font-medium mt-2">
           {post.price} euros<span className="font-light"> night</span>
