@@ -11,6 +11,7 @@ interface PostFeedProps {
 }
 
 const PostFeed: FC<PostFeedProps> = ({ posts }) => {
+  console.log(posts, "post")
   const { data } = useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
