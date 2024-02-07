@@ -15,6 +15,7 @@ const PostFeed: FC<PostFeedProps> = ({ posts }) => {
     queryKey: ["posts"],
     queryFn: async () => {
       const { data } = await axios.get("/api/queryFns/posts");
+      console.log(data, "das");
       return data as Post[];
     },
     initialData: posts,
