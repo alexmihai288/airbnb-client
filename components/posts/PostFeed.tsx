@@ -23,7 +23,7 @@ const PostFeed: FC<PostFeedProps> = ({ posts }) => {
   const router = useRouter();
 
   return (
-    <div className="grid grid-rows-1 md:grid-cols-2 lg:grid-cols-3 gap-y-14">
+    <div className="grid grid-rows-1 md:grid-cols-2 lg:grid-cols-3 lg:justify-items-center gap-y-14">
       {data?.map((post) => (
         <div
           key={post.id}
