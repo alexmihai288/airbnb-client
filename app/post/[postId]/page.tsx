@@ -19,7 +19,7 @@ const page: FC<pageProps> = async ({ params: { postId } }) => {
     <div className="container">
       <Header title={`${post?.country}, ${post?.city}`} />
 
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex flex-col md:flex-row justify-center gap-2">
         <Image
           src={post?.images[0]!}
           width={350}
